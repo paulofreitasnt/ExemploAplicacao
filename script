@@ -1,0 +1,26 @@
+﻿CREATE TABLE produto(
+	id INT PRIMARY KEY,
+	descricao VARCHAR(50),
+	preco FLOAT
+);
+
+CREATE TABLE supermercado(
+	id INT PRIMARY KEY,
+	nome VARCHAR(50)
+);
+
+CREATE TABLE venda(
+	id INT PRIMARY KEY,
+	id_supermercado INT,
+	dia DATE,
+	FOREIGN KEY(id_supermercado) REFERENCES supermercado(id)
+);
+
+CREATE TABLE itemvenda(
+	id INT PRIMARY KEY,
+	id_produto INT,
+	id_venda INT,
+	quantidade INT,
+	FOREIGN KEY(id_produto) REFERENCES produto(id),
+	FOREIGN KEY(id_venda) REFERENCES venda(id)
+);
