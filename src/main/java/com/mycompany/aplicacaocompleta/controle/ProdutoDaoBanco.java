@@ -8,13 +8,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class ProdutoDaoBanco implements Dao<Produto> {
 
     private Connection con;
 
-    public ProdutoDaoBanco() throws ClassNotFoundException, SQLException {
-        con = new ConFactory().getConnection();
+    public ProdutoDaoBanco(){
+        try {
+            con = new ConFactory().getConnection();
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(null,
+                    "Falha na conexão com o banco",
+                    "Mensagem de Erro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     @Override

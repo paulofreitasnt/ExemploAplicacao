@@ -10,17 +10,27 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class ProdutoDaoArquivo implements Dao<Produto> {
 
     private final File arquivo;
 
-    public ProdutoDaoArquivo() throws IOException {
+    public ProdutoDaoArquivo(){
 
         arquivo = new File("produtos.bin");
 
         if (!arquivo.exists()) {
-            arquivo.createNewFile();
+            try {
+                arquivo.createNewFile();
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null,
+                        "Falha na conexão com arquivo",
+                        "Mensagem de erro",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
 
     }
